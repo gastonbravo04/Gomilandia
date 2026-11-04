@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Gomilandia 🐻 – Gomitas Mendoza</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pacifico&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --pk: #FF6B9D;
+      --pk2: #E91E8C;
+      --pkp: #FFF0F7;
+      --pkl: #FFD6EB;
+      --li: #C97FE8;
+      --ye: #FFE135;
+      --dk: #1A0A22;
+      --gy: #8B7A95;
+      --wh: #fff;
+      --sh: 0 8px 40px rgba(233, 30, 140, .13)
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--pkp);
+      color: var(--dk);
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 15% 10%, rgba(255, 107, 157, .12) 0%, transparent 55%), radial-gradient(ellipse at 85% 85%, rgba(201, 127, 232, .10) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: linear-gradient(90deg, var(--pk2), var(--li));
+      color: #fff;
+      text-align: center;
+      padding: 9px 24px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+      position: relative;
+      z-index: 10
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(18px);
+      border-bottom: 2.5px solid var(--pkl);
+      padding: 0 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      box-shadow: 0 3px 30px rgba(233, 30, 140, .10)
+    }
+
+    .nav-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.7rem;
+      color: var(--pk2);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .nav-logo-img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--pkl)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dk);
+      font-weight: 700;
+      font-size: .92rem;
+      transition: color .2s
+    }
+
+    .nav-links a:hover {
+      color: var(--pk2)
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .btn-wa-sm {
+      background: #25D366;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 9px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: .85rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform .2s;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .3)
+    }
+
+    .btn-wa-sm:hover {
+      transform: scale(1.05)
+    }
+
+    .cart-btn {
+      background: linear-gradient(135deg, var(--pk2), var(--pk));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: .92rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform .2s;
+      box-shadow: 0 4px 18px rgba(233, 30, 140, .35)
+    }
+
+    .cart-btn:hover {
+      transform: scale(1.05)
+    }
+
+    .cart-count {
+      background: var(--ye);
+      color: var(--dk);
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .78rem;
+      font-weight: 900
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 90px 40px 70px;
+      text-align: center;
+      overflow: hidden
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: orb ease-in-out infinite
+    }
+
+    .hero-orb:nth-child(1) {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(255, 107, 157, .16), transparent 70%);
+      top: -160px;
+      left: -120px;
+      animation-duration: 18s
+    }
+
+    .hero-orb:nth-child(2) {
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(201, 127, 232, .13), transparent 70%);
+      bottom: -120px;
+      right: -100px;
+      animation-duration: 22s;
+      animation-direction: reverse
+    }
+
+    @keyframes orb {
+
+      0%,
+      100% {
+        transform: translate(0, 0)
+      }
+
+      50% {
+        transform: translate(30px, -24px)
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      color: var(--pk2);
+      font-weight: 800;
+      font-size: .84rem;
+      padding: 7px 20px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      border: 2px solid var(--pkl);
+      box-shadow: var(--sh);
+      animation: fbadge 3s ease-in-out infinite
+    }
+
+    @keyframes fbadge {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-7px)
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(3.2rem, 9vw, 6.5rem);
+      line-height: 1.05;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--pk2) 0%, var(--li) 55%, var(--pk) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(2px 3px 0px rgba(233, 30, 140, .18))
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--gy);
+      max-width: 480px;
+      margin: 0 auto 38px;
+      font-weight: 600;
+      line-height: 1.6
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .btn-big {
+      border: none;
+      border-radius: 50px;
+      padding: 17px 40px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform .25s, box-shadow .25s
+    }
+
+    .btn-big-pk {
+      background: linear-gradient(135deg, var(--pk2), var(--pk));
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(233, 30, 140, .4)
+    }
+
+    .btn-big-pk:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(233, 30, 140, .5)
+    }
+
+    .btn-big-wa {
+      background: #25D366;
+      color: #fff;
+      box-shadow: 0 8px 28px rgba(37, 211, 102, .35)
+    }
+
+    .btn-big-wa:hover {
+      transform: translateY(-3px)
+    }
+
+    .floater {
+      position: absolute;
+      pointer-events: none;
+      animation: fup linear infinite;
+      opacity: 0
+    }
+
+    @keyframes fup {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0
+      }
+
+      10% {
+        opacity: .55
+      }
+
+      90% {
+        opacity: .55
+      }
+
+      100% {
+        transform: translateY(-95vh) rotate(720deg);
+        opacity: 0
+      }
+    }
+
+    /* SECTION COMMONS */
+    .sec-wrap {
+      position: relative;
+      z-index: 1
+    }
+
+    .sec-lbl {
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--pk2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 10px
+    }
+
+    .sec-lbl::before,
+    .sec-lbl::after {
+      content: '';
+      flex: 1;
+      max-width: 55px;
+      height: 1.5px;
+      background: var(--pkl)
+    }
+
+    .sec-h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dk);
+      text-align: center;
+      margin-bottom: 8px
+    }
+
+    .sec-h2 em {
+      color: var(--pk2);
+      font-style: normal
+    }
+
+    .sec-desc {
+      text-align: center;
+      color: var(--gy);
+      font-size: .97rem;
+      font-weight: 600;
+      margin-bottom: 48px
+    }
+
+    /* PRODUCTS */
+    .products-sec {
+      padding: 80px 36px;
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+      gap: 28px
+    }
+
+    .prod-card {
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--sh);
+      transition: transform .3s, box-shadow .3s;
+      border: 2px solid transparent
+    }
+
+    .prod-card:hover {
+      transform: translateY(-10px) rotate(.4deg);
+      box-shadow: 0 20px 60px rgba(233, 30, 140, .22);
+      border-color: var(--pkl)
+    }
+
+    .prod-img-w {
+      position: relative;
+      height: 270px;
+      overflow: hidden
+    }
+
+    .prod-img-w img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s
+    }
+
+    .prod-card:hover .prod-img-w img {
+      transform: scale(1.08)
+    }
+
+    .prod-bdg {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      background: linear-gradient(135deg, var(--pk2), var(--li));
+      color: #fff;
+      font-size: .73rem;
+      font-weight: 800;
+      padding: 5px 13px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: .3px
+    }
+
+    .prod-body {
+      padding: 20px 22px 24px
+    }
+
+    .prod-name {
+      font-size: 1.13rem;
+      font-weight: 800;
+      color: var(--dk);
+      margin-bottom: 5px
+    }
+
+    .prod-desc {
+      font-size: .87rem;
+      color: var(--gy);
+      font-weight: 500;
+      line-height: 1.55;
+      margin-bottom: 16px
+    }
+
+    .prod-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .prod-price {
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--pk2), var(--li));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .add-btn {
+      background: linear-gradient(135deg, var(--pk2), var(--pk));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: .87rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform .2s, box-shadow .2s
+    }
+
+    .add-btn:hover {
+      transform: scale(1.06);
+      box-shadow: 0 4px 16px rgba(233, 30, 140, .4)
+    }
+
+    .add-btn.added {
+      background: linear-gradient(135deg, #22c55e, #16a34a)
+    }
+
+    /* HOW */
+    .how-sec {
+      background: #fff;
+      padding: 80px 36px
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 28px;
+      max-width: 900px;
+      margin: 0 auto
+    }
+
+    .step {
+      text-align: center
+    }
+
+    .step-ic {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.65rem;
+      margin: 0 auto 14px;
+      position: relative
+    }
+
+    .step-ic::after {
+      content: attr(data-n);
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      background: var(--pk2);
+      color: #fff;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      font-size: .66rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .step:nth-child(1) .step-ic {
+      background: #FFE8F3
+    }
+
+    .step:nth-child(2) .step-ic {
+      background: #FFF3E8
+    }
+
+    .step:nth-child(3) .step-ic {
+      background: #E8F8FF
+    }
+
+    .step:nth-child(4) .step-ic {
+      background: #F0FFE8
+    }
+
+    .step:nth-child(5) .step-ic {
+      background: #F5E8FF
+    }
+
+    .step h3 {
+      font-size: .97rem;
+      font-weight: 800;
+      color: var(--dk);
+      margin-bottom: 5px
+    }
+
+    .step p {
+      font-size: .84rem;
+      color: var(--gy);
+      font-weight: 500;
+      line-height: 1.55
+    }
+
+    /* PAGOS */
+    .pagos-sec {
+      padding: 80px 36px;
+      max-width: 760px;
+      margin: 0 auto
+    }
+
+    .pagos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px
+    }
+
+    .pago-card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 34px 26px;
+      text-align: center;
+      box-shadow: var(--sh)
+    }
+
+    .pago-card .ei {
+      font-size: 2.6rem;
+      margin-bottom: 13px
+    }
+
+    .pago-card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--dk);
+      margin-bottom: 7px
+    }
+
+    .pago-card p {
+      font-size: .87rem;
+      color: var(--gy);
+      font-weight: 500;
+      line-height: 1.55
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--dk);
+      color: #fff;
+      text-align: center;
+      padding: 56px 36px 40px
+    }
+
+    .ft-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      color: var(--pk);
+      margin-bottom: 8px
+    }
+
+    .ft-sub {
+      color: rgba(255, 255, 255, .5);
+      font-size: .92rem;
+      font-weight: 500;
+      margin-bottom: 24px
+    }
+
+    .ft-links {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 26px
+    }
+
+    .ft-links a {
+      color: rgba(255, 255, 255, .65);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: .87rem;
+      transition: color .2s
+    }
+
+    .ft-links a:hover {
+      color: var(--pk)
+    }
+
+    .ft-cr {
+      color: rgba(255, 255, 255, .3);
+      font-size: .76rem;
+      margin-top: 18px
+    }
+
+    /* WA FAB */
+    .wa-fab {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 150;
+      background: #25D366;
+      color: #fff;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 6px 28px rgba(37, 211, 102, .5);
+      animation: pwa 2.8s ease-in-out infinite;
+      transition: transform .3s
+    }
+
+    .wa-fab:hover {
+      transform: scale(1.12)
+    }
+
+    @keyframes pwa {
+
+      0%,
+      100% {
+        box-shadow: 0 6px 28px rgba(37, 211, 102, .5)
+      }
+
+      50% {
+        box-shadow: 0 6px 48px rgba(37, 211, 102, .8)
+      }
+    }
+
+    /* OVERLAYS */
+    .ov {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 10, 34, .6);
+      z-index: 200;
+      backdrop-filter: blur(7px);
+      align-items: flex-end;
+      justify-content: center
+    }
+
+    .ov.open {
+      display: flex
+    }
+
+    /* CART MODAL */
+    .cart-modal {
+      background: #fff;
+      border-radius: 32px 32px 0 0;
+      width: 100%;
+      max-width: 540px;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 32px 28px 52px;
+      animation: sup .38s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    @keyframes sup {
+      from {
+        transform: translateY(100%)
+      }
+
+      to {
+        transform: translateY(0)
+      }
+    }
+
+    .m-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px
+    }
+
+    .m-hdr h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem;
+      color: var(--pk2)
+    }
+
+    .x-btn {
+      background: var(--pkp);
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s
+    }
+
+    .x-btn:hover {
+      background: var(--pkl)
+    }
+
+    .ci {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 12px 0;
+      border-bottom: 1.5px solid var(--pkp)
+    }
+
+    .ci img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 13px;
+      flex-shrink: 0
+    }
+
+    .ci-nfo {
+      flex: 1
+    }
+
+    .ci-nfo b {
+      font-size: .92rem;
+      font-weight: 800;
+      display: block
+    }
+
+    .ci-nfo small {
+      color: var(--gy);
+      font-size: .82rem;
+      font-weight: 600
+    }
+
+    .qty-c {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .qty-c button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--pkl);
+      background: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: var(--pk2)
+    }
+
+    .qty-c span {
+      font-weight: 900;
+      min-width: 20px;
+      text-align: center
+    }
+
+    .total-row {
+      background: var(--pkp);
+      border-radius: 14px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0
+    }
+
+    .total-row span {
+      font-weight: 700;
+      color: var(--gy)
+    }
+
+    .total-row strong {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--pk2)
+    }
+
+    .fsec h3 {
+      font-size: .97rem;
+      font-weight: 800;
+      color: var(--dk);
+      margin: 18px 0 13px
+    }
+
+    .fg {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 12px
+    }
+
+    .fg label {
+      font-size: .81rem;
+      font-weight: 800;
+      color: var(--dk)
+    }
+
+    .fg input,
+    .fg select,
+    .fg textarea {
+      border: 2px solid var(--pkp);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .92rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color .2s;
+      color: var(--dk)
+    }
+
+    .fg input:focus,
+    .fg select:focus,
+    .fg textarea:focus {
+      border-color: var(--pk)
+    }
+
+    .fg textarea {
+      resize: none;
+      height: 68px
+    }
+
+    .card-opts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    .co {
+      border: 2px solid var(--pkp);
+      border-radius: 13px;
+      padding: 12px 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color .2s, background .2s
+    }
+
+    .co:hover,
+    .co.sel {
+      border-color: var(--li);
+      background: #F8F0FF
+    }
+
+    .co .ei {
+      font-size: 1.4rem;
+      margin-bottom: 3px
+    }
+
+    .co span {
+      font-size: .72rem;
+      font-weight: 800;
+      display: block;
+      color: var(--dk)
+    }
+
+    .pay-opts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+      margin-bottom: 12px
+    }
+
+    .po {
+      border: 2px solid var(--pkp);
+      border-radius: 13px;
+      padding: 14px 10px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color .2s, background .2s
+    }
+
+    .po:hover,
+    .po.sel {
+      border-color: var(--pk2);
+      background: var(--pkp)
+    }
+
+    .po .ei {
+      font-size: 1.5rem;
+      margin-bottom: 3px
+    }
+
+    .po span {
+      font-size: .81rem;
+      font-weight: 800;
+      display: block;
+      color: var(--dk)
+    }
+
+    .conf-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--pk2), var(--pk));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 17px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(233, 30, 140, .35);
+      transition: transform .2s;
+      margin-top: 6px
+    }
+
+    .conf-btn:hover {
+      transform: translateY(-2px)
+    }
+
+    .empty-c {
+      text-align: center;
+      padding: 50px 0;
+      color: var(--gy);
+      font-weight: 600
+    }
+
+    .empty-c .big {
+      font-size: 3.5rem;
+      margin-bottom: 12px
+    }
+
+    .succ {
+      display: none;
+      text-align: center;
+      padding: 30px 10px
+    }
+
+    .succ .big {
+      font-size: 4rem;
+      margin-bottom: 14px
+    }
+
+    .succ h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.9rem;
+      color: var(--pk2);
+      margin-bottom: 10px
+    }
+
+    .succ p {
+      color: var(--gy);
+      font-weight: 600;
+      line-height: 1.6
+    }
+
+    /* ═══════ ADMIN — fully hidden, shown only via ?admin URL ═══════ */
+    .adm-ov {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 10, 34, .82);
+      z-index: 500;
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    .adm-ov.open {
+      display: flex
+    }
+
+    .adm-panel {
+      background: #fff;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 860px;
+      max-height: 92vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .4)
+    }
+
+    .adm-hdr {
+      background: linear-gradient(135deg, #1A0A22, #2D1B3D);
+      color: #fff;
+      padding: 22px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0
+    }
+
+    .adm-hdr h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      color: var(--pk)
+    }
+
+    .adm-tabs {
+      display: flex;
+      background: #F8F0FF;
+      border-bottom: 2px solid var(--pkp);
+      flex-shrink: 0
+    }
+
+    .atab {
+      flex: 1;
+      padding: 14px 8px;
+      border: none;
+      background: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: .84rem;
+      cursor: pointer;
+      color: var(--gy);
+      transition: color .2s, background .2s
+    }
+
+    .atab.on {
+      color: var(--pk2);
+      background: #fff;
+      border-bottom: 3px solid var(--pk2)
+    }
+
+    .adm-body {
+      flex: 1;
+      overflow-y: auto
+    }
+
+    .adm-sec {
+      display: none;
+      padding: 24px 28px
+    }
+
+    .adm-sec.on {
+      display: block
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 24px
+    }
+
+    .sbox {
+      background: var(--pkp);
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center
+    }
+
+    .sbox .sv {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--pk2)
+    }
+
+    .sbox .sl {
+      font-size: .75rem;
+      font-weight: 800;
+      color: var(--gy);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-top: 2px
+    }
+
+    .vrow {
+      background: var(--pkp);
+      border-radius: 14px;
+      padding: 15px 17px;
+      margin-bottom: 11px;
+      border-left: 4px solid var(--pk2)
+    }
+
+    .vrow .vh {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7px;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .vrow .vh b {
+      font-size: .91rem;
+      font-weight: 800
+    }
+
+    .vbadge {
+      font-size: .7rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: #fff;
+      border: 1.5px solid var(--pkl);
+      color: var(--pk2)
+    }
+
+    .vrow .vitems {
+      font-size: .81rem;
+      color: var(--gy);
+      font-weight: 500;
+      margin-bottom: 5px
+    }
+
+    .vrow .vbot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .vrow .vtotal {
+      font-size: .93rem;
+      font-weight: 900;
+      color: var(--pk2)
+    }
+
+    .vrow .vfecha {
+      font-size: .73rem;
+      color: var(--gy)
+    }
+
+    .ap-row {
+      background: var(--pkp);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 11px;
+      display: flex;
+      align-items: center;
+      gap: 13px
+    }
+
+    .ap-row img {
+      width: 54px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0
+    }
+
+    .ap-info {
+      flex: 1
+    }
+
+    .ap-nm {
+      font-weight: 800;
+      font-size: .91rem;
+      color: var(--dk)
+    }
+
+    .ap-pr {
+      color: var(--pk2);
+      font-weight: 900;
+      font-size: .91rem
+    }
+
+    .ap-btns {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0
+    }
+
+    .eb,
+    .db {
+      border: none;
+      border-radius: 9px;
+      padding: 7px 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: .77rem;
+      cursor: pointer
+    }
+
+    .eb {
+      background: #fff;
+      color: var(--pk2);
+      border: 1.5px solid var(--pkl)
+    }
+
+    .eb:hover {
+      background: var(--pkl)
+    }
+
+    .db {
+      background: #FFF0F0;
+      color: #dc2626;
+      border: 1.5px solid #fecaca
+    }
+
+    .db:hover {
+      background: #fecaca
+    }
+
+    .add-prod-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--pk2), var(--li));
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: .93rem;
+      cursor: pointer;
+      margin-bottom: 18px
+    }
+
+    .add-prod-btn:hover {
+      opacity: .9
+    }
+
+    /* ADMIN LOGIN SCREEN */
+    .adm-login-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 52px 40px;
+      text-align: center
+    }
+
+    .adm-login-wrap .lock {
+      font-size: 3rem;
+      margin-bottom: 16px
+    }
+
+    .adm-login-wrap h3 {
+      font-family: 'Pacifico', cursive;
+      color: var(--pk2);
+      font-size: 1.7rem;
+      margin-bottom: 6px
+    }
+
+    .adm-login-wrap p {
+      color: var(--gy);
+      font-weight: 500;
+      margin-bottom: 28px;
+      font-size: .93rem
+    }
+
+    .adm-login-wrap .login-fields {
+      width: 100%;
+      max-width: 340px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .adm-login-wrap input {
+      border: 2px solid var(--pkp);
+      border-radius: 12px;
+      padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s;
+      width: 100%
+    }
+
+    .adm-login-wrap input:focus {
+      border-color: var(--pk)
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, var(--pk2), var(--pk));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 4px
+    }
+
+    .adm-err {
+      color: #dc2626;
+      font-size: .84rem;
+      margin-top: 6px;
+      display: none;
+      font-weight: 600
+    }
+
+    /* prod edit modal */
+    .pe-ov {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 600;
+      background: rgba(26, 10, 34, .7);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    .pe-ov.open {
+      display: flex
+    }
+
+    .pe-box {
+      background: #fff;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 430px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px
+    }
+
+    .pe-box h3 {
+      font-family: 'Pacifico', cursive;
+      color: var(--pk2);
+      font-size: 1.28rem;
+      margin-bottom: 20px
+    }
+
+    @media(max-width:640px) {
+      nav {
+        padding: 0 14px
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .hero {
+        padding: 60px 18px 50px
+      }
+
+      .products-sec,
+      .pagos-sec {
+        padding: 60px 16px
+      }
+
+      .pagos-grid {
+        grid-template-columns: 1fr
+      }
+
+      .card-opts {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr
+      }
+
+      footer {
+        padding: 40px 18px
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">🍬 ¡Todos los productos incluyen tarjeta personalizada! · Pedí y retirá en Mendoza</div>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <img class="nav-logo-img" src="/mnt/user-data/uploads/1777477511310_image.png" alt="Logo"
+        onerror="this.style.display='none'" />
+      Gomilandia
+    </a>
+    <ul class="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#como">¿Cómo pedimos?</a></li>
+      <li><a href="#pagos">Pagos</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/542604594824" target="_blank" class="btn-wa-sm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z" />
+        </svg>
+        WhatsApp
+      </a>
+      <button class="cart-btn" onclick="openCart()">🛒 Carrito <span class="cart-count" id="cartCount">0</span></button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <div class="hero-orb"></div>
+    <div id="floatersWrap"></div>
+    <div class="hero-badge">🐻 Emprendimiento con amor</div>
+    <h1>Gomilandia</h1>
+    <p class="hero-sub">El mundo más dulce y colorido 🌈<br />Gomitas artesanales para todos los momentos</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn-big btn-big-pk">🍬 Ver productos</a>
+      <a href="https://wa.me/542604594824" target="_blank" class="btn-big btn-big-wa">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="white">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+          <path
+            d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z" />
+        </svg>
+        Escribinos
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="sec-wrap products-sec" id="productos">
+    <div class="sec-lbl">🍭 Nuestros sabores</div>
+    <h2 class="sec-h2">Todos nuestros <em>productos</em></h2>
+    <p class="sec-desc">Hechos con amor · Incluyen tarjeta personalizada</p>
+    <div class="prod-grid" id="prodGrid"></div>
+  </section>
+
+  <!-- HOW -->
+  <section class="sec-wrap how-sec" id="como">
+    <div class="sec-lbl">✨ El proceso</div>
+    <h2 class="sec-h2">¿Cómo <em>pedís</em>?</h2>
+    <p class="sec-desc">Simple, rápido y lleno de gomitas</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-ic" data-n="1">🛒</div>
+        <h3>Elegís</h3>
+        <p>Seleccioná tus productos favoritos</p>
+      </div>
+      <div class="step">
+        <div class="step-ic" data-n="2">🎀</div>
+        <h3>Personalizás</h3>
+        <p>Elegís la tarjeta: cumpleaños, regalo o con amor</p>
+      </div>
+      <div class="step">
+        <div class="step-ic" data-n="3">📝</div>
+        <h3>Completás</h3>
+        <p>Dejás tus datos y forma de pago</p>
+      </div>
+      <div class="step">
+        <div class="step-ic" data-n="4">💬</div>
+        <h3>Confirmamos</h3>
+        <p>Te escribimos por WhatsApp para coordinar</p>
+      </div>
+      <div class="step">
+        <div class="step-ic" data-n="5">🎉</div>
+        <h3>Retirás</h3>
+        <p>Pasás a buscar tu pedido y lo disfrutás</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGOS -->
+  <section class="sec-wrap pagos-sec" id="pagos">
+    <div class="sec-lbl">💳 Métodos de pago</div>
+    <h2 class="sec-h2">Cómo <em>pagás</em></h2>
+    <p class="sec-desc">Las dos opciones para tu comodidad</p>
+    <div class="pagos-grid">
+      <div class="pago-card">
+        <div class="ei">🏦</div>
+        <h3>Transferencia</h3>
+        <p>Pagás antes de retirar. Te pasamos los datos por WhatsApp.</p>
+      </div>
+      <div class="pago-card">
+        <div class="ei">💵</div>
+        <h3>Efectivo</h3>
+        <p>Pagás en el momento que venís a retirar tu pedido.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="ft-logo">🍬 Gomilandia.</div>
+    <div class="ft-sub">El mundo más dulce de San Rafael Mendoza · @gomilandia.sr</div>
+    <div class="ft-links">
+      <a href="#productos">Productos</a>
+      <a href="#como">¿Cómo pedimos?</a>
+      <a href="#pagos">Pagos</a>
+      <a href="https://wa.me/542604594824" target="_blank">WhatsApp</a>
+      <a href="https://instagram.com/gomilandia.sr" target="_blank">Instagram</a>
+    </div>
+    <a href="https://wa.me/542604594824" target="_blank" class="btn-big btn-big-wa" style="display:inline-flex">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z" />
+      </svg>
+      Escribinos por WhatsApp
+    </a>
+    <a href="https://instagram.com/gomilandia.sr" target="_blank" class="btn-big btn-big-pk"
+      style="display:inline-flex">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+        <path
+          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 100-8 4 4 0 000 8zm4.965-10.322a1.44 1.44 0 110-2.881 1.44 1.44 0 010 2.881z" />
+      </svg>
+      Síguenos en Instagram
+    </a>
+    <div class="ft-cr">© 2026 Gomilandia · San Rafael Mendoza, Argentina 🍬</div>
+  </footer>
+
+  <!-- WA FAB -->
+  <a href="https://wa.me/542604594824" target="_blank" class="wa-fab">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5 -.669 -.51 -.173 -.008 -.371 -.01 -.57 -.01 -.198 0 -.52 .074 -.792 .372 -.272 .297 -1.04 1.016 -1.04 2.479 0 1.462 1.065 2.875 1.2₁₃ 3.074 .₁₄₉ .₁₉₈ ₂₀₉₆ ₃.₂ ₅₀₇₇ ₄.₄₈₇ .₇₀₉ .₃₀₆ ₁₂₆₂ .₄₈₉ ₁․₆⁹⁴ .⁶²⁵ .⁷¹² .²²⁷ ₁․³⁶ .₁⁹⁵ ₁․⁸⁷¹ .¹¹⁸ .⁵⁷¹ -."
+        fill="white" />
+  </a>
+
+  <!-- INSTAGRAM FAB -->
+  <a href="https://instagram.com/gomilandia.sr" target="_blank"
+    style="position:fixed;bottom:30px;right:104px;z-index:150;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border-radius:50%;width:64px;height:64px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 6px 28px rgba(233,30,140,.5);animation:pwa 2.8s ease-in-out infinite;transition:transform .3s;"
+    onmouseover="this.style.transform='scale(1.12)'" onmouseout="this.style.transform=''">
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+      <path
+        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 100-8 4 4 0 000 8zm4.965-10.322a1.44 1.44 0 110-2.881 1.44 1.44 0 010 2.881z" />
+    </svg>
+  </a>
+
+  <!-- ═══════════════ CART OVERLAY ═══════════════ -->
+  <div class="ov" id="cartOv" onclick="if(event.target===this)closeCart()">
+    <div class="cart-modal">
+      <div class="m-hdr">
+        <h2>🛒 Mi pedido</h2><button class="x-btn" onclick="closeCart()">✕</button>
+      </div>
+      <div id="cartInner"></div>
+      <div class="succ" id="succScreen">
+        <div class="big">🎉</div>
+        <h3>¡Pedido enviado!</h3>
+        <p>Te redirigimos a WhatsApp para confirmar los detalles.<br />¡Gracias por elegirnos! 🍬</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ADMIN OVERLAY (hidden, opens via ?admin) ═══════════════ -->
+  <div class="adm-ov" id="admOv">
+    <!-- LOGIN -->
+    <div class="adm-panel" id="admLoginPanel">
+      <div class="adm-hdr">
+        <h2>🔐 Admin Gomilandia</h2>
+        <button class="x-btn" onclick="closeAdm()" style="background:rgba(255,255,255,.12);color:#fff">✕</button>
+      </div>
+      <div class="adm-login-wrap">
+        <div class="lock">🍬</div>
+        <h3>Panel Administrador</h3>
+        <p>Solo vos podés acceder a esta sección</p>
+        <div class="login-fields">
+          <input type="text" id="admUser" placeholder="Usuario" onkeydown="if(event.key==='Enter')doLogin()" />
+          <input type="password" id="admPass" placeholder="Contraseña" onkeydown="if(event.key==='Enter')doLogin()" />
+          <button class="login-btn" onclick="doLogin()">Entrar al panel</button>
+          <div class="adm-err" id="admErr">Usuario o contraseña incorrectos ❌</div>
+        </div>
+      </div>
+    </div>
+    <!-- MAIN PANEL -->
+    <div class="adm-panel" id="admMainPanel" style="display:none">
+      <div class="adm-hdr">
+        <h2>⚙ Panel Administrador</h2>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button onclick="doLogout()"
+            style="background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer;font-size:.8rem">Cerrar
+            sesión</button>
+          <button class="x-btn" onclick="closeAdm()" style="background:rgba(255,255,255,.12);color:#fff">✕</button>
+        </div>
+      </div>
+      <div class="adm-tabs">
+        <button class="atab on" onclick="swTab('ventas',this)">📊 Ventas</button>
+        <button class="atab" onclick="swTab('prods',this)">🍬 Productos</button>
+      </div>
+      <div class="adm-body">
+        <div class="adm-sec on" id="tab-ventas">
+          <div class="stats" id="statsRow"></div>
+          <h3 style="font-weight:800;margin-bottom:14px;color:var(--dk)">Historial de pedidos</h3>
+          <div id="ventasList"></div>
+        </div>
+        <div class="adm-sec" id="tab-prods">
+          <button class="add-prod-btn" onclick="newProd()">+ Agregar nuevo producto</button>
+          <div id="admProdList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT EDIT MODAL -->
+  <div class="pe-ov" id="peOv">
+    <div class="pe-box">
+      <h3 id="peTitle">Nuevo producto</h3>
+      <div class="fg"><label>Nombre del producto</label><input id="pe-name" type="text"
+          placeholder="ej: Picada Gomi Mix" /></div>
+      <div class="fg"><label>Descripción</label><textarea id="pe-desc" placeholder="Breve descripción"></textarea></div>
+      <div class="fg"><label>Precio ($)</label><input id="pe-price" type="number" placeholder="ej: 5000" /></div>
+      <div class="fg"><label>Categoría</label><input id="pe-tag" type="text" placeholder="ej: Picada, Vaso, Mini..." />
+      </div>
+      <div class="fg"><label>Emoji</label><input id="pe-emoji" type="text" placeholder="🍬" maxlength="2" /></div>
+      <div class="fg">
+        <label>Imagen del producto</label>
+        <input type="file" id="pe-file" accept="image/*" onchange="previewImg(this)" />
+        <img id="pe-preview"
+          style="width:100%;max-height:150px;object-fit:cover;border-radius:12px;margin-top:8px;display:none" />
+        <input type="hidden" id="pe-img" />
+      </div>
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <button class="conf-btn" style="flex:1" onclick="saveProd()">Guardar producto</button>
+        <button class="x-btn" style="width:46px;height:46px;flex-shrink:0" onclick="closePeOv()">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ═══════════════════════════════════════════
+       CREDENTIALS — change these to whatever you want
+    ═══════════════════════════════════════════ */
+    const ADMIN_USER = 'gomilandia';
+    const ADMIN_PASS = 'gomitas2026';
+
+    /* ═══════════════════════════════════════════
+       DATA
+    ═══════════════════════════════════════════ */
+    const IMGS = {
+      1: '/mnt/user-data/uploads/1777423742578_image.png',
+      2: '/mnt/user-data/uploads/1777423742578_image.png',
+      3: '/mnt/user-data/uploads/1777423737718_WhatsApp_Image_2026-04-28_at_21_47_49.jpeg',
+      4: '/mnt/user-data/uploads/1777423730418_WhatsApp_Image_2026-04-28_at_21_48_12.jpeg',
+      5: '/mnt/user-data/uploads/1777423737718_WhatsApp_Image_2026-04-28_at_21_47_49.jpeg',
+      6: '/mnt/user-data/uploads/1777423720431_WhatsApp_Image_2026-04-28_at_21_47_50.jpeg'
+    };
+    const DEF = [
+      { id: 1, name: 'Mini Sweet Cup', tag: 'Vaso', emoji: '🥤', price: 5000, desc: 'Vasito individual colmado de gomitas variadas. Ideal para llevar!' },
+      { id: 2, name: 'Sweet Cup', tag: 'Vaso', emoji: '🥤', price: 6000, desc: 'Vaso grande con cúpula, cargado de las mejores gomitas coloridas.' },
+      { id: 3, name: 'Sweet Shot', tag: 'Mini', emoji: '🍬', price: 3500, desc: 'Porción pequeña perfecta para un antojo rápido o para compartir.' },
+      { id: 4, name: 'Corazón Gomilandia', tag: 'Especial', emoji: '💖', price: 5000, desc: 'Caja corazón rellena de gomitas variadas. Perfecto para regalar.' },
+      { id: 5, name: 'Ensalada Gomilandia', tag: 'Ensalada', emoji: '🌈', price: 11000, desc: 'Tupper cuadrado con mezcla colorida y abundante de gomitas.' },
+      { id: 6, name: 'Picada Gomi Mix', tag: 'Picada', emoji: '🎡', price: 12500, desc: 'Bandeja redonda con 5 variedades. Ideal para compartir en grupo.' }
+    ];
+    DEF.forEach(p => { p.img = IMGS[p.id]; });
+
+    const PH = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='270'%3E%3Crect fill='%23FFD6EB' width='400' height='270'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='70'%3E🍬%3C/text%3E%3C/svg%3E";
+
+    function loadProds() { try { const s = localStorage.getItem('gomi_prods'); return s ? JSON.parse(s) : DEF.map(p => ({ ...p })); } catch (e) { return DEF.map(p => ({ ...p })); } }
+    function saveProds(p) { localStorage.setItem('gomi_prods', JSON.stringify(p)); }
+    function loadSales() { try { const s = localStorage.getItem('gomi_sales'); return s ? JSON.parse(s) : []; } catch (e) { return []; } }
+    function saveSales(v) { localStorage.setItem('gomi_sales', JSON.stringify(v)); }
+
+    let prods = loadProds();
+    let sales = loadSales();
+    let cart = {}, selPay = '', selCard = '', editId = null, admLogged = false;
+
+    /* ═══ PRODUCTS ═══ */
+    function renderProds() {
+      document.getElementById('prodGrid').innerHTML = prods.map(p => `
+    <div class="prod-card">
+      <div class="prod-img-w">
+        <img src="${p.img || PH}" alt="${p.name}" loading="lazy" onerror="this.src='${PH}'"/>
+        <span class="prod-bdg">${p.emoji} ${p.tag}</span>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-foot">
+          <span class="prod-price">$${p.price.toLocaleString('es-AR')}</span>
+          <button class="add-btn" id="ab-${p.id}" onclick="addToCart(${p.id})">+ Agregar</button>
+        </div>
+      </div>
+    </div>`).join('');
+    }
+
+    /* ═══ CART ═══ */
+    function addToCart(id) {
+      cart[id] = (cart[id] || 0) + 1; updateCount();
+      const b = document.getElementById('ab-' + id); if (!b) return;
+      b.textContent = '✓ Listo!'; b.classList.add('added');
+      setTimeout(() => { b.textContent = '+ Agregar'; b.classList.remove('added'); }, 1600);
+    }
+    function updateCount() { document.getElementById('cartCount').textContent = Object.values(cart).reduce((a, b) => a + b, 0); }
+    function openCart() { document.getElementById('cartOv').classList.add('open'); document.getElementById('succScreen').style.display = 'none'; document.getElementById('cartInner').style.display = ''; renderCart(); }
+    function closeCart() { document.getElementById('cartOv').classList.remove('open'); }
+    function chQty(id, d) { cart[id] = (cart[id] || 0) + d; if (cart[id] <= 0) delete cart[id]; updateCount(); renderCart(); }
+    function selPayFn(m) { selPay = m; document.querySelectorAll('.po').forEach(x => x.classList.remove('sel')); document.getElementById('po-' + m)?.classList.add('sel'); }
+    function selCardFn(m) { selCard = m; document.querySelectorAll('.co').forEach(x => x.classList.remove('sel')); document.getElementById('co-' + m)?.classList.add('sel'); }
+
+    function renderCart() {
+      const ci = document.getElementById('cartInner');
+      const keys = Object.keys(cart);
+      if (!keys.length) { ci.innerHTML = `<div class="empty-c"><div class="big">🛒</div><p>Tu carrito está vacío.<br/>Agregá tus gomitas favoritas!</p></div>`; return; }
+      let total = 0;
+      const rows = keys.map(id => {
+        const p = prods.find(x => x.id == id); if (!p) return ''; const q = cart[id], sub = p.price * q; total += sub;
+        return `<div class="ci"><img src="${p.img || PH}" alt="${p.name}" onerror="this.src='${PH}'"/><div class="ci-nfo"><b>${p.name}</b><small>$${p.price.toLocaleString('es-AR')} c/u</small></div><div class="qty-c"><button onclick="chQty(${id},-1)">−</button><span>${q}</span><button onclick="chQty(${id},1)">+</button></div></div>`;
+      }).join('');
+      ci.innerHTML = `
+    <div>${rows}</div>
+    <div class="total-row"><span>Total:</span><strong>$${total.toLocaleString('es-AR')}</strong></div>
+    <div class="fsec">
+      <h3>🎀 Ocasion de la tarjeta</h3>
+      <div class="card-opts">
+        <div class="co" id="co-cumple" onclick="selCardFn('cumple')"><div class="ei">🎂</div><span>Cumpleanos</span></div>
+        <div class="co" id="co-regalo" onclick="selCardFn('regalo')"><div class="ei">🎁</div><span>Regalo</span></div>
+        <div class="co" id="co-amor" onclick="selCardFn('amor')"><div class="ei">💖</div><span>Con amor</span></div>
+        <div class="co" id="co-otro" onclick="selCardFn('otro')"><div class="ei">✨</div><span>Otra ocasion</span></div>
+      </div>
+      <div class="fg"><label>Mensaje para la tarjeta (opcional)</label><textarea id="cardMsg" placeholder="Ej: Feliz cumple Sofi! Te quiero mucho"></textarea></div>
+      <h3>Tus datos</h3>
+      <div class="fg"><label>Tu nombre</label><input id="f-nombre" type="text" placeholder="Como te llamas?"/></div>
+      <div class="fg"><label>WhatsApp</label><input id="f-tel" type="tel" placeholder="Ej: 2604123456"/></div>
+      <h3>Forma de pago</h3>
+      <div class="pay-opts">
+        <div class="po" id="po-transferencia" onclick="selPayFn('transferencia')"><div class="ei">🏦</div><span>Transferencia</span></div>
+        <div class="po" id="po-efectivo" onclick="selPayFn('efectivo')"><div class="ei">💵</div><span>Efectivo al retirar</span></div>
+      </div>
+      <div class="fg"><label>Aclaraciones (opcional)</label><textarea id="f-nota" placeholder="Ej: fecha de retiro, sin alguna gomita especifica..."></textarea></div>
+      <button class="conf-btn" onclick="confirmOrder()">Confirmar pedido por WhatsApp</button>
+    </div>`;
+      if (selPay) document.getElementById('po-' + selPay)?.classList.add('sel');
+      if (selCard) document.getElementById('co-' + selCard)?.classList.add('sel');
+    }
+
+    /* ═══ CONFIRM — clean WA message with universal emojis ═══ */
+    function confirmOrder() {
+      const nombre = document.getElementById('f-nombre')?.value.trim();
+      const tel = document.getElementById('f-tel')?.value.trim();
+      const nota = document.getElementById('f-nota')?.value.trim() || '';
+      const cardMsg = document.getElementById('cardMsg')?.value.trim() || '';
+      if (!nombre) { alert('Por favor ingresa tu nombre'); return; }
+      if (!tel) { alert('Por favor ingresa tu WhatsApp'); return; }
+      if (!selCard) { alert('Por favor elige el tipo de tarjeta'); return; }
+      if (!selPay) { alert('Por favor elige una forma de pago'); return; }
+      if (!Object.keys(cart).length) { alert('El carrito esta vacio'); return; }
+
+      const CLBL = { cumple: 'Cumpleanos', regalo: 'Regalo', amor: 'Con amor', otro: 'Otra ocasion' };
+      const CICON = { cumple: '(cumple)', regalo: '(regalo)', amor: '(amor)', otro: '' };
+
+      // Build clean WhatsApp message with only safe emojis
+      let msg = '';
+      msg += '-----------------------------------\n';
+      msg += '       NUEVO PEDIDO GOMILANDIA\n';
+      msg += '-----------------------------------\n\n';
+      msg += '*DATOS DEL CLIENTE*\n';
+      msg += 'Nombre: ' + nombre + '\n';
+      msg += 'WhatsApp: ' + tel + '\n\n';
+      msg += '*PRODUCTOS*\n';
+
+      let total = 0; const itemsList = [];
+      Object.keys(cart).forEach(id => {
+        const p = prods.find(x => x.id == id); if (!p) return;
+        const q = cart[id], sub = p.price * q; total += sub;
+        msg += '  - ' + p.name + ' x' + q + ' --> $' + sub.toLocaleString('es-AR') + '\n';
+        itemsList.push(p.name + ' x' + q);
+      });
+
+      msg += '\n';
+      msg += '*TOTAL: $' + total.toLocaleString('es-AR') + '*\n\n';
+      msg += '*PAGO:* ' + (selPay === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo al retirar') + '\n';
+      msg += '*TARJETA:* ' + CLBL[selCard] + ' ' + CICON[selCard] + '\n';
+      if (cardMsg) msg += '*Mensaje para la tarjeta:* "' + cardMsg + '"\n';
+      if (nota) msg += '*Aclaracion:* ' + nota + '\n';
+      msg += '\n-----------------------------------';
+
+      // save sale
+      sales.unshift({ id: Date.now(), nombre, tel, total, items: itemsList, pago: selPay, tarjeta: CLBL[selCard], cardMsg, fecha: new Date().toLocaleString('es-AR') });
+      saveSales(sales);
+
+      cart = {}; selPay = ''; selCard = ''; updateCount();
+      document.getElementById('cartInner').style.display = 'none';
+      document.getElementById('succScreen').style.display = 'block';
+      setTimeout(() => window.open('https://wa.me/542604594824?text=' + encodeURIComponent(msg), '_blank'), 900);
+    }
+
+    /* ═══ ADMIN — only accessible via ?admin in URL ═══ */
+    function checkAdminUrl() {
+      if (window.location.search.includes('admin') || window.location.hash === '#admin') {
+        // Clean the URL so others can't see
+        history.replaceState(null, '', window.location.pathname);
+        openAdm();
+      }
+    }
+    function openAdm() {
+      document.getElementById('admOv').classList.add('open');
+      admLogged ? showAdmMain() : showAdmLogin();
+    }
+    function closeAdm() {
+      document.getElementById('admOv').classList.remove('open');
+      // clear inputs
+      document.getElementById('admUser').value = '';
+      document.getElementById('admPass').value = '';
+      document.getElementById('admErr').style.display = 'none';
+    }
+    function showAdmLogin() {
+      document.getElementById('admLoginPanel').style.display = 'flex';
+      document.getElementById('admLoginPanel').style.flexDirection = 'column';
+      document.getElementById('admMainPanel').style.display = 'none';
+    }
+    function showAdmMain() {
+      document.getElementById('admLoginPanel').style.display = 'none';
+      document.getElementById('admMainPanel').style.display = 'flex';
+      document.getElementById('admMainPanel').style.flexDirection = 'column';
+      renderSales(); renderAdmProds();
+    }
+    function doLogin() {
+      const u = document.getElementById('admUser').value.trim();
+      const p = document.getElementById('admPass').value;
+      if (u === ADMIN_USER && p === ADMIN_PASS) { admLogged = true; document.getElementById('admErr').style.display = 'none'; showAdmMain(); }
+      else { document.getElementById('admErr').style.display = 'block'; }
+    }
+    function doLogout() { admLogged = false; showAdmLogin(); }
+    function swTab(t, el) {
+      document.querySelectorAll('.atab').forEach(x => x.classList.remove('on')); el.classList.add('on');
+      document.querySelectorAll('.adm-sec').forEach(x => x.classList.remove('on')); document.getElementById('tab-' + t).classList.add('on');
+    }
+
+    /* ═══ SALES ═══ */
+    function renderSales() {
+      const tot = sales.reduce((a, s) => a + s.total, 0);
+      const tr = sales.filter(s => s.pago === 'transferencia').length;
+      document.getElementById('statsRow').innerHTML = `
+    <div class="sbox"><div class="sv">${sales.length}</div><div class="sl">Pedidos</div></div>
+    <div class="sbox"><div class="sv">$${tot.toLocaleString('es-AR')}</div><div class="sl">Total vendido</div></div>
+    <div class="sbox"><div class="sv">${tr}</div><div class="sl">Transferencias</div></div>`;
+      document.getElementById('ventasList').innerHTML = sales.length
+        ? sales.map(s => `<div class="vrow">
+        <div class="vh"><b>${s.nombre} — ${s.tel}</b><span class="vbadge">${s.pago === 'transferencia' ? 'Transferencia' : 'Efectivo'}</span></div>
+        <div class="vitems">${s.items.join(', ')} · Tarjeta: ${s.tarjeta}</div>
+        ${s.cardMsg ? `<div class="vitems" style="font-style:italic">"${s.cardMsg}"</div>` : ''}
+        <div class="vbot"><span class="vtotal">$${s.total.toLocaleString('es-AR')}</span><span class="vfecha">${s.fecha}</span></div>
+      </div>`).join('')
+        : '<div style="text-align:center;color:var(--gy);padding:30px;font-weight:600">Aun no hay pedidos registrados</div>';
+    }
+
+    /* ═══ ADMIN PRODUCTS ═══ */
+    function renderAdmProds() {
+      document.getElementById('admProdList').innerHTML = prods.map(p => `
+    <div class="ap-row">
+      <img src="${p.img || PH}" alt="${p.name}" onerror="this.src='${PH}'"/>
+      <div class="ap-info"><div class="ap-nm">${p.emoji} ${p.name}</div><div class="ap-pr">$${p.price.toLocaleString('es-AR')}</div></div>
+      <div class="ap-btns">
+        <button class="eb" onclick="editProd(${p.id})">Editar</button>
+        <button class="db" onclick="delProd(${p.id})">Eliminar</button>
+      </div>
+    </div>`).join('');
+    }
+    function newProd() {
+      editId = null; document.getElementById('peTitle').textContent = 'Nuevo producto';
+      ['pe-name', 'pe-desc', 'pe-tag', 'pe-emoji', 'pe-img'].forEach(i => document.getElementById(i).value = '');
+      document.getElementById('pe-price').value = '';
+      document.getElementById('pe-preview').style.display = 'none';
+      document.getElementById('peOv').classList.add('open');
+    }
+    function editProd(id) {
+      const p = prods.find(x => x.id === id); if (!p) return;
+      editId = id; document.getElementById('peTitle').textContent = 'Editar producto';
+      document.getElementById('pe-name').value = p.name;
+      document.getElementById('pe-desc').value = p.desc;
+      document.getElementById('pe-price').value = p.price;
+      document.getElementById('pe-tag').value = p.tag;
+      document.getElementById('pe-emoji').value = p.emoji || '🍬';
+      document.getElementById('pe-img').value = p.img || '';
+      const pv = document.getElementById('pe-preview'); pv.src = p.img || PH; pv.style.display = p.img ? 'block' : 'none';
+      document.getElementById('peOv').classList.add('open');
+    }
+    function closePeOv() { document.getElementById('peOv').classList.remove('open'); }
+    function delProd(id) { if (!confirm('Eliminar este producto?')) return; prods = prods.filter(x => x.id !== id); saveProds(prods); renderProds(); renderAdmProds(); }
+    function previewImg(inp) { const f = inp.files[0]; if (!f) return; const r = new FileReader(); r.onload = e => { document.getElementById('pe-preview').src = e.target.result; document.getElementById('pe-preview').style.display = 'block'; document.getElementById('pe-img').value = e.target.result; }; r.readAsDataURL(f); }
+    function saveProd() {
+      const name = document.getElementById('pe-name').value.trim();
+      const price = parseInt(document.getElementById('pe-price').value) || 0;
+      if (!name || !price) { alert('Completa nombre y precio'); return; }
+      const desc = document.getElementById('pe-desc').value.trim();
+      const tag = document.getElementById('pe-tag').value.trim() || 'Producto';
+      const emoji = document.getElementById('pe-emoji').value.trim() || '🍬';
+      const img = document.getElementById('pe-img').value || '';
+      if (editId) { const p = prods.find(x => x.id === editId); if (p) { p.name = name; p.desc = desc; p.price = price; p.tag = tag; p.emoji = emoji; if (img) p.img = img; } }
+      else { prods.push({ id: Math.max(0, ...prods.map(x => x.id)) + 1, name, desc, price, tag, emoji, img }); }
+      saveProds(prods); renderProds(); renderAdmProds(); closePeOv();
+    }
+
+    /* ═══ FLOATERS ═══ */
+    function initFloaters() {
+      const em = ['🍬', '🍭', '🌈', '✨', '💖', '🍓', '⭐', '🎉', '🐻', '💜', '🦄', '🎀'];
+      const c = document.getElementById('floatersWrap');
+      for (let i = 0; i < 14; i++) {
+        const el = document.createElement('span'); el.className = 'floater';
+        el.textContent = em[Math.floor(Math.random() * em.length)];
+        el.style.cssText = `left:${Math.random() * 100}%;bottom:-60px;font-size:${1.1 + Math.random() * 1.8}rem;animation-duration:${9 + Math.random() * 10}s;animation-delay:${Math.random() * 14}s`;
+        c.appendChild(el);
+      }
+    }
+
+    /* ═══ SMOOTH SCROLL ═══ */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); } });
+    });
+
+    /* ═══ INIT ═══ */
+    renderProds();
+    initFloaters();
+    checkAdminUrl(); // Opens admin if URL has ?admin
+  </script>
+</body>
+
+</html>

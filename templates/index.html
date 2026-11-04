@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gomilandia 🐻🍬 – Gomitas Artesanales en San Rafael, Mendoza</title>
+  <meta name="description" content="Gomilandia: Gomitas artesanales, combos dulces y regalos personalizados en San Rafael, Mendoza. Vasos, picadas y bandejas con tarjeta dedicatoria incluida."/>
+  
+  <!-- OpenGraph para compartir en WhatsApp -->
+  <meta property="og:title" content="Gomilandia 🐻 – Gomitas Artesanales"/>
+  <meta property="og:description" content="El mundo más dulce y colorido. ¡Elegí tus gomitas y hacé tu pedido por WhatsApp con tarjeta personalizada!"/>
+  <meta property="og:image" content="/static/img/logo.jpg"/>
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍬</text></svg>"/>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&family=Pacifico&display=swap" rel="stylesheet"/>
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="/static/css/styles.css"/>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <aside class="topbar">
+    🍬 ¡Todos los pedidos incluyen tarjeta personalizada con tu dedicatoria! · Retiro en San Rafael, Mendoza
+  </aside>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="/" class="nav-brand">
+      <img src="/static/img/logo.jpg" alt="Logo Gomilandia" class="nav-logo-img"/>
+      <span class="nav-title">Gomilandia</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#como">¿Cómo pedir?</a></li>
+      <li><a href="#pagos">Formas de Pago</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="https://wa.me/{{ wa_number }}" target="_blank" rel="noopener" class="btn-wa-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z"/></svg>
+        WhatsApp
+      </a>
+
+      <button class="cart-toggle-btn" onclick="openCartModal()" aria-label="Abrir Carrito">
+        <span>🛒 Carrito</span>
+        <span class="cart-badge" id="cartBadgeCount">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div id="heroCandiesContainer"></div>
+    <div class="hero-pill-badge">🐻 Emprendimiento con amor artesanal</div>
+    <h1>Gomilandia</h1>
+    <p class="hero-sub">
+      El mundo más dulce y colorido de <span>San Rafael, Mendoza</span> 🌈<br/>
+      Gomitas frescas, cajas sorpresa y regalos para alegrarle el día a quien quieras.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#productos" class="btn-cta btn-cta-pink">🍬 Ver nuestros productos</a>
+      <a href="https://wa.me/{{ wa_number }}" target="_blank" rel="noopener" class="btn-cta btn-cta-green">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z"/></svg>
+        Hacer consulta por WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <!-- Products Section -->
+  <main class="section-wrapper" id="productos">
+    <div class="section-tag">🍭 Sabores y Presentaciones</div>
+    <h2 class="section-heading">Nuestros <em>Productos</em></h2>
+    <p class="section-desc">Hechos con amor y dedicación · Incluyen tarjeta con dedicatoria gratuita</p>
+
+    <div class="products-grid" id="productsGrid">
+      {% for p in products %}
+      <article class="product-card {% if p.in_stock == 0 %}out-of-stock{% endif %}">
+        <div class="product-img-wrapper">
+          <img src="{{ p.img }}" alt="{{ p.name }}" loading="lazy" onerror="this.src='/static/img/logo.jpg'"/>
+          <div class="product-category-badge">{{ p.emoji }} {{ p.tag }}</div>
+          {% if p.in_stock == 0 %}
+          <div class="product-out-of-stock-badge">🚫 Sin Stock</div>
+          {% endif %}
+        </div>
+        <div class="product-card-body">
+          <h3 class="product-name">{{ p.name }}</h3>
+          <p class="product-desc">{{ p.desc }}</p>
+          <div class="product-card-footer">
+            <span class="product-price">${{ "{:,}".format(p.price).replace(',', '.') }}</span>
+            {% if p.in_stock == 1 %}
+            <button class="btn-add-cart" id="btn-add-{{ p.id }}" onclick="addToCart({{ p.id }})">
+              <span>+</span> Agregar
+            </button>
+            {% else %}
+            <button class="btn-add-cart disabled" disabled title="Este producto no tiene stock disponible en este momento">
+              🚫 Sin Stock
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </main>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section" id="como">
+    <div class="section-tag">✨ Pasos Sencillos</div>
+    <h2 class="section-heading">¿Cómo <em>hacés tu pedido</em>?</h2>
+    <p class="section-desc">Rápido, transparente y directo a tu WhatsApp</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-icon-wrap" data-step="1">🛒</div>
+        <h3>1. Elegís</h3>
+        <p>Agregás al carrito los productos y vasitos que más te gusten.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap" data-step="2">🎀</div>
+        <h3>2. Personalizás</h3>
+        <p>Elegís la tarjeta (cumpleaños, regalo, amor) y escribís tu mensaje.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap" data-step="3">📝</div>
+        <h3>3. Completás</h3>
+        <p>Dejás tu nombre, WhatsApp y seleccionás tu forma de pago.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap" data-step="4">💬</div>
+        <h3>4. Confirmamos</h3>
+        <p>Se te abre WhatsApp con el pedido listo para enviarnos en 1 toque.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-icon-wrap" data-step="5">🎉</div>
+        <h3>5. Retirás</h3>
+        <p>Coordinamos el día de retiro en San Rafael y ¡a disfrutar!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Methods Section -->
+  <section class="section-wrapper" id="pagos">
+    <div class="section-tag">💳 Métodos de Pago</div>
+    <h2 class="section-heading">Cómo <em>Abonás</em></h2>
+    <p class="section-desc">Elegí la opción más cómoda para vos</p>
+
+    <div class="payments-grid">
+      <div class="payment-card">
+        <div class="p-icon">🏦</div>
+        <h3>Transferencia Bancaria</h3>
+        <p>Podés abonar por Mercado Pago o transferencia bancaria antes de retirar. Te pasamos los datos por WhatsApp.</p>
+      </div>
+
+      <div class="payment-card">
+        <div class="p-icon">💵</div>
+        <h3>Efectivo al Retirar</h3>
+        <p>Abonás directamente en mano en el momento en que pasás a buscar tu pedido por nuestro punto de retiro.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">🍬 Gomilandia.</div>
+    <div class="footer-sub">El rincón más dulce de San Rafael, Mendoza · Argentina 🐻</div>
+
+    <div class="footer-links">
+      <a href="#productos">Productos</a>
+      <a href="#como">¿Cómo pedir?</a>
+      <a href="#pagos">Pagos</a>
+      <a href="https://wa.me/{{ wa_number }}" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://instagram.com/gomilandia.sr" target="_blank" rel="noopener">Instagram</a>
+    </div>
+
+    <div class="footer-buttons">
+      <a href="https://wa.me/{{ wa_number }}" target="_blank" rel="noopener" class="btn-cta btn-cta-green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+      <a href="https://instagram.com/gomilandia.sr" target="_blank" rel="noopener" class="btn-cta btn-cta-pink">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 100-8 4 4 0 000 8zm4.965-10.322a1.44 1.44 0 110-2.881 1.44 1.44 0 010 2.881z"/></svg>
+        Seguinos en Instagram
+      </a>
+    </div>
+
+    <div class="footer-copy">
+      © 2026 Gomilandia · San Rafael, Mendoza, Argentina · Todos los derechos reservados 🍬
+    </div>
+  </footer>
+
+  <!-- Floating Action Buttons -->
+  <div class="floating-actions-container">
+    <a href="https://instagram.com/gomilandia.sr" target="_blank" rel="noopener" class="fab-btn fab-ig" aria-label="Instagram Gomilandia">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 100-8 4 4 0 000 8zm4.965-10.322a1.44 1.44 0 110-2.881 1.44 1.44 0 010 2.881z"/></svg>
+    </a>
+
+    <a href="https://wa.me/{{ wa_number }}" target="_blank" rel="noopener" class="fab-btn fab-wa" aria-label="WhatsApp Gomilandia">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.122 1.532 5.858L.036 23.591a.5.5 0 00.61.61l5.733-1.496A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.933a9.937 9.937 0 01-5.065-1.383l-.363-.216-3.762.981.999-3.659-.236-.376A9.933 9.933 0 012.067 12C2.067 6.512 6.512 2.067 12 2.067S21.933 6.512 21.933 12 17.488 21.933 12 21.933z"/></svg>
+    </a>
+  </div>
+
+  <!-- ═══════════════ CART MODAL OVERLAY ═══════════════ -->
+  <div class="overlay" id="cartOverlay" onclick="if(event.target===this)closeCartModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>🛒 Mi Pedido Dulce</h2>
+        <button class="close-btn" onclick="closeCartModal()" aria-label="Cerrar Carrito">✕</button>
+      </div>
+
+      <!-- Main Cart & Checkout Form -->
+      <div id="cartFormContent"></div>
+
+      <!-- Success Screen -->
+      <div class="order-success-screen" id="orderSuccessScreen">
+        <div class="success-icon">🎉</div>
+        <h3>¡Pedido Recibido!</h3>
+        <p>Tu pedido fue guardado exitosamente.<br/>Te estamos abriendo WhatsApp con el detalle completo para coordinar el retiro. 🍬</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

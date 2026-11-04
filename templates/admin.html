@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel de Administración – Gomilandia</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍬</text></svg>"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet"/>
+  
+  <link rel="stylesheet" href="/static/css/styles.css"/>
+
+  <style>
+    :root {
+      --admin-bg: #F8FAFC;
+      --admin-card: #FFFFFF;
+      --admin-border: #E2E8F0;
+      --admin-dark: #0F172A;
+      --admin-primary: #E91E8C;
+      --admin-primary-hover: #D81B60;
+    }
+
+    body {
+      background-color: var(--admin-bg);
+      color: #1E293B;
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Admin Header */
+    .admin-nav {
+      background: #FFFFFF;
+      border-bottom: 2px solid var(--pk-border);
+      padding: 0 32px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .admin-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid var(--pk-main);
+      object-fit: cover;
+    }
+
+    .admin-nav-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--pk-deep);
+    }
+
+    .admin-badge-mode {
+      background: var(--pk-light);
+      color: var(--pk-deep);
+      border: 1px solid var(--pk-border);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .admin-nav-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-view-store {
+      background: #FFFFFF;
+      color: var(--dk-text);
+      border: 1.5px solid var(--pk-border);
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-view-store:hover {
+      background: var(--pk-light);
+      border-color: var(--pk-deep);
+      color: var(--pk-deep);
+    }
+
+    .btn-logout {
+      background: #FEE2E2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-logout:hover {
+      background: #FCA5A5;
+      color: #991B1B;
+    }
+
+    /* Container */
+    .admin-container {
+      max-width: 1300px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+      flex: 1;
+    }
+
+    /* Tab Switcher */
+    .admin-tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      border-bottom: 2px solid #E2E8F0;
+      padding-bottom: 12px;
+    }
+
+    .admin-tab {
+      background: none;
+      border: none;
+      padding: 12px 24px;
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: #64748B;
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-tab:hover {
+      color: var(--pk-deep);
+      background: var(--pk-light);
+    }
+
+    .admin-tab.active {
+      color: var(--pk-deep);
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(233, 30, 140, 0.1);
+      border: 1px solid var(--pk-border);
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1.5px solid var(--pk-border);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pk-deep), var(--li-accent));
+    }
+
+    .kpi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .kpi-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #64748B;
+    }
+
+    .kpi-icon {
+      font-size: 1.6rem;
+    }
+
+    .kpi-val {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--dk-text);
+      line-height: 1.1;
+    }
+
+    .kpi-desc {
+      font-size: 0.82rem;
+      color: #94A3B8;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    /* Control Bar */
+    .control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .search-box {
+      flex: 1;
+      max-width: 420px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 50px;
+      padding: 12px 20px 12px 42px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--pk-deep);
+      box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      color: #94A3B8;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #64748B;
+      transition: all 0.2s;
+    }
+
+    .filter-pill:hover,
+    .filter-pill.active {
+      background: var(--pk-deep);
+      color: #FFFFFF;
+      border-color: var(--pk-deep);
+    }
+
+    /* Orders Feed Table */
+    .order-card {
+      background: #FFFFFF;
+      border-radius: 18px;
+      padding: 22px 26px;
+      margin-bottom: 16px;
+      border: 1.5px solid #E2E8F0;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .order-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .order-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .order-client-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .order-id-badge {
+      background: #0F172A;
+      color: #FFFFFF;
+      font-size: 0.8rem;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .order-client-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--dk-text);
+    }
+
+    .btn-wa-client {
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: transform 0.2s;
+    }
+
+    .btn-wa-client:hover {
+      transform: scale(1.05);
+    }
+
+    .order-status-select {
+      border: 2px solid transparent;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .status-pendiente {
+      background: #FEF3C7;
+      color: #B45309;
+      border-color: #FDE68A;
+    }
+
+    .status-entregado {
+      background: #D1FAE5;
+      color: #047857;
+      border-color: #A7F3D0;
+    }
+
+    .status-cancelado {
+      background: #FEE2E2;
+      color: #B91C1C;
+      border-color: #FECACA;
+    }
+
+    .order-items-box {
+      background: #F8FAFC;
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+    }
+
+    .order-item-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      padding: 4px 0;
+      color: #334155;
+    }
+
+    .order-card-message {
+      background: var(--pk-light);
+      border-left: 3px solid var(--pk-deep);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--pk-deep);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .order-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid #F1F5F9;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .order-total-price {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--pk-deep);
+    }
+
+    .order-meta-info {
+      font-size: 0.82rem;
+      color: #64748B;
+      font-weight: 600;
+    }
+
+    /* Product Admin Cards Grid */
+    .admin-prods-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .admin-prod-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      border: 1.5px solid var(--pk-border);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+
+    .admin-prod-card.out-of-stock {
+      border-color: #CBD5E1;
+      opacity: 0.88;
+    }
+
+    .admin-prod-img-wrap {
+      position: relative;
+      height: 190px;
+      background: var(--pk-light);
+    }
+
+    .admin-prod-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .admin-stock-badge-tag {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      font-weight: 800;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .badge-in-stock {
+      background: #10B981;
+      color: #FFFFFF;
+    }
+
+    .badge-out-stock {
+      background: #EF4444;
+      color: #FFFFFF;
+    }
+
+    .admin-prod-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .admin-prod-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--dk-text);
+      margin-bottom: 4px;
+    }
+
+    .admin-prod-desc {
+      font-size: 0.88rem;
+      color: #64748B;
+      margin-bottom: 16px;
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    .admin-prod-price-tag {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--pk-deep);
+      margin-bottom: 16px;
+    }
+
+    .admin-actions-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1.5px solid #F1F5F9;
+      padding-top: 16px;
+    }
+
+    /* STOCK TOGGLE BUTTON - PROMINENT */
+    .btn-stock-toggle {
+      width: 100%;
+      padding: 11px 16px;
+      border-radius: var(--radius-pill);
+      border: none;
+      font-weight: 900;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-stock-toggle.is-stock {
+      background: #D1FAE5;
+      color: #047857;
+      border: 1.5px solid #A7F3D0;
+    }
+
+    .btn-stock-toggle.is-stock:hover {
+      background: #A7F3D0;
+      transform: translateY(-1px);
+    }
+
+    .btn-stock-toggle.no-stock {
+      background: #FEE2E2;
+      color: #B91C1C;
+      border: 1.5px solid #FECACA;
+    }
+
+    .btn-stock-toggle.no-stock:hover {
+      background: #FECACA;
+      transform: translateY(-1px);
+    }
+
+    .secondary-prod-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-edit-prod-full {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1.5px solid var(--pk-border);
+      color: var(--pk-deep);
+      padding: 8px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-edit-prod-full:hover {
+      background: var(--pk-light);
+    }
+
+    .btn-del-prod-full {
+      background: #FFF1F2;
+      border: 1.5px solid #FFE4E6;
+      color: #E11D48;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-del-prod-full:hover {
+      background: #FFE4E6;
+    }
+
+    /* Toast Notification */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 14px 22px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      font-weight: 700;
+      font-size: 0.92rem;
+      z-index: 500;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      animation: slideInToast 0.3s ease;
+    }
+
+    @keyframes slideInToast {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Admin Navbar -->
+  <nav class="admin-nav">
+    <div class="admin-nav-left">
+      <img src="/static/img/logo.jpg" alt="Logo" class="admin-logo"/>
+      <span class="admin-nav-title">Gomilandia</span>
+      <span class="admin-badge-mode">Panel Administrador</span>
+    </div>
+
+    <div class="admin-nav-right">
+      <a href="/" target="_blank" class="btn-view-store">
+        <span>🌐</span> Ver Tienda Pública ↗
+      </a>
+      <a href="/admin/logout" class="btn-logout">
+        <span>🔒</span> Cerrar Sesión
+      </a>
+    </div>
+  </nav>
+
+  <div class="admin-container">
+
+    <!-- KPI Metric Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Facturación Total</span>
+          <span class="kpi-icon">💰</span>
+        </div>
+        <div class="kpi-val">${{ "{:,}".format(stats.total_revenue).replace(',', '.') }}</div>
+        <div class="kpi-desc">Total acumulado de pedidos registrados</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Pedidos Totales</span>
+          <span class="kpi-icon">📦</span>
+        </div>
+        <div class="kpi-val">{{ stats.total_orders }}</div>
+        <div class="kpi-desc">Movimientos recibidos en la app</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Pedidos Pendientes</span>
+          <span class="kpi-icon">⏳</span>
+        </div>
+        <div class="kpi-val" style="color: #D97706;">{{ stats.pending_orders }}</div>
+        <div class="kpi-desc">Pedidos por coordinar / entregar</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Productos Sin Stock</span>
+          <span class="kpi-icon">🚫</span>
+        </div>
+        <div class="kpi-val" style="color: {% if stats.out_of_stock_count > 0 %}#DC2626{% else %}#10B981{% endif %};">
+          {{ stats.out_of_stock_count }} <span style="font-size: 1.1rem; color: #94A3B8;">/ {{ stats.total_products }}</span>
+        </div>
+        <div class="kpi-desc">Pausados en la tienda pública</div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab active" id="tabBtnMovimientos" onclick="switchSection('movimientos')">
+        <span>📊</span> Movimientos de la App ({{ orders|length }})
+      </button>
+      <button class="admin-tab" id="tabBtnCatalogo" onclick="switchSection('catalogo')">
+        <span>🍬</span> Catálogo, Precios, Fotos & Stock ({{ products|length }})
+      </button>
+    </div>
+
+    <!-- ═══════════════ TAB 1: MOVIMIENTOS & PEDIDOS ═══════════════ -->
+    <section id="sectionMovimientos">
+      <div class="control-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="orderSearchInput" placeholder="Buscar por cliente, teléfono o producto..." oninput="filterOrders()"/>
+        </div>
+
+        <div class="filter-pills">
+          <button class="filter-pill active" onclick="setOrderFilter('all', this)">Todos</button>
+          <button class="filter-pill" onclick="setOrderFilter('pendiente', this)">Pendientes</button>
+          <button class="filter-pill" onclick="setOrderFilter('entregado', this)">Entregados</button>
+          <button class="filter-pill" onclick="setOrderFilter('cancelado', this)">Cancelados</button>
+        </div>
+      </div>
+
+      <div id="ordersListContainer">
+        {% if orders %}
+          {% for o in orders %}
+          <div class="order-card" data-order-id="{{ o.id }}" data-status="{{ o.status }}" data-client="{{ o.client_name|lower }}" data-phone="{{ o.client_phone }}">
+            <div class="order-header-row">
+              <div class="order-client-info">
+                <span class="order-id-badge">#{{ o.id }}</span>
+                <span class="order-client-name">{{ o.client_name }}</span>
+                <a href="https://wa.me/54{{ o.client_phone|replace(' ', '')|replace('-', '')|replace('+', '') }}?text=¡Hola%20{{ o.client_name|urlencode }}!%20🍬%20Te%20escribimos%20de%20Gomilandia%20por%20tu%20pedido%20%23{{ o.id }}." target="_blank" class="btn-wa-client">
+                  <span>📱</span> WhatsApp ({{ o.client_phone }})
+                </a>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <select class="order-status-select status-{{ o.status }}" onchange="updateOrderStatus({{ o.id }}, this.value, this)">
+                  <option value="pendiente" {% if o.status == 'pendiente' %}selected{% endif %}>⏳ Pendiente</option>
+                  <option value="entregado" {% if o.status == 'entregado' %}selected{% endif %}>✅ Entregado</option>
+                  <option value="cancelado" {% if o.status == 'cancelado' %}selected{% endif %}>❌ Cancelado</option>
+                </select>
+                <button onclick="deleteOrder({{ o.id }})" style="background: #FEE2E2; border: 1px solid #FECACA; color: #DC2626; border-radius: 50%; width: 34px; height: 34px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Eliminar este pedido">🗑️</button>
+              </div>
+            </div>
+
+            <!-- Items -->
+            <div class="order-items-box">
+              {% for it in o.order_items %}
+              <div class="order-item-line">
+                <span><b>{{ it.name }}</b> × {{ it.qty }}</span>
+                <span>${{ "{:,}".format(it.subtotal).replace(',', '.') }}</span>
+              </div>
+              {% endfor %}
+            </div>
+
+            {% if o.card_occasion or o.card_message %}
+            <div class="order-card-message">
+              🎀 <b>Tarjeta:</b> {{ o.card_occasion }} {% if o.card_message %}— <i>"{{ o.card_message }}"</i>{% endif %}
+            </div>
+            {% endif %}
+
+            {% if o.notes %}
+            <div style="font-size: 0.85rem; color: #64748B; margin-bottom: 8px;">
+              📝 <b>Nota del cliente:</b> {{ o.notes }}
+            </div>
+            {% endif %}
+
+            <div class="order-footer-row">
+              <div class="order-total-price">
+                Total: ${{ "{:,}".format(o.total_price).replace(',', '.') }}
+              </div>
+              <div class="order-meta-info">
+                <span>💳 {{ 'Transferencia Bancaria' if o.payment_method == 'transferencia' else 'Efectivo al retirar' }}</span>
+                &nbsp;·&nbsp;
+                <span>📅 {{ o.created_at }}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        {% else %}
+          <div style="text-align: center; padding: 60px 20px; background: #fff; border-radius: 18px; border: 1.5px solid #E2E8F0;">
+            <div style="font-size: 3rem; margin-bottom: 12px;">📦</div>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: #1E293B;">Aún no hay pedidos registrados</h3>
+            <p style="color: #64748B;">Cuando tus clientes realicen pedidos desde la tienda pública aparecerán detallados aquí.</p>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- ═══════════════ TAB 2: CATÁLOGO, PRECIOS & STOCK ═══════════════ -->
+    <section id="sectionCatalogo" style="display: none;">
+      <div class="control-bar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="prodSearchInput" placeholder="Buscar producto en catálogo..." oninput="filterProducts()"/>
+        </div>
+
+        <button class="btn-cta btn-cta-pink" onclick="openProductModal(null)">
+          <span>+</span> Agregar Nuevo Producto
+        </button>
+      </div>
+
+      <div class="admin-prods-grid" id="adminProdsGrid">
+        {% for p in products %}
+        <div class="admin-prod-card {% if p.in_stock == 0 %}out-of-stock{% endif %}" id="prodCard-{{ p.id }}" data-name="{{ p.name|lower }}" data-desc="{{ p.desc|lower }}">
+          <div class="admin-prod-img-wrap">
+            <img src="{{ p.img }}" alt="{{ p.name }}" onerror="this.src='/static/img/logo.jpg'"/>
+            <span class="admin-stock-badge-tag {% if p.in_stock == 1 %}badge-in-stock{% else %}badge-out-stock{% endif %}" id="stockBadge-{{ p.id }}">
+              {{ '✅ En Stock' if p.in_stock == 1 else '🚫 Sin Stock' }}
+            </span>
+          </div>
+
+          <div class="admin-prod-body">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+              <h3 class="admin-prod-title">{{ p.emoji }} {{ p.name }}</h3>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #64748B; background: #F1F5F9; padding: 3px 8px; border-radius: 6px;">{{ p.tag }}</span>
+            </div>
+
+            <p class="admin-prod-desc">{{ p.desc }}</p>
+
+            <div class="admin-prod-price-tag">
+              ${{ "{:,}".format(p.price).replace(',', '.') }}
+            </div>
+
+            <div class="admin-actions-bar">
+              <!-- BOTÓN DE SIN STOCK / EN STOCK INTERACTIVO -->
+              <button class="btn-stock-toggle {% if p.in_stock == 1 %}is-stock{% else %}no-stock{% endif %}" 
+                      id="btnStockToggle-{{ p.id }}"
+                      onclick="toggleProductStock({{ p.id }})">
+                {% if p.in_stock == 1 %}
+                  <span>🟢</span> En Stock (Click para pausar)
+                {% else %}
+                  <span>🔴</span> Sin Stock (Click para activar)
+                {% endif %}
+              </button>
+
+              <div class="secondary-prod-actions">
+                <button class="btn-edit-prod-full" onclick="openProductModal({{ p.id }})">
+                  ✏️ Editar Datos y Foto
+                </button>
+                <button class="btn-del-prod-full" onclick="deleteProductFromAdmin({{ p.id }})">
+                  🗑️
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══════════════ MODAL AGREGAR / EDITAR PRODUCTO ═══════════════ -->
+  <div class="overlay" id="adminProdModal" onclick="if(event.target===this)closeProductModal()">
+    <div class="modal-content" style="max-width: 520px;">
+      <div class="modal-header">
+        <h2 id="modalProdTitle">Editar Producto</h2>
+        <button class="close-btn" onclick="closeProductModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="editModalProdId"/>
+
+      <div class="form-group">
+        <label>Nombre del Producto *</label>
+        <input type="text" id="editModalName" placeholder="Ej: Super Sweet Cup Mix"/>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div class="form-group">
+          <label>Precio en ARS ($) *</label>
+          <input type="number" id="editModalPrice" placeholder="Ej: 6000"/>
+        </div>
+        <div class="form-group">
+          <label>Categoría / Tag</label>
+          <input type="text" id="editModalTag" placeholder="Ej: Vaso, Picada, Caja"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Emoji identificador</label>
+        <input type="text" id="editModalEmoji" placeholder="🍬" maxlength="2"/>
+      </div>
+
+      <div class="form-group">
+        <label>Descripción detallada</label>
+        <textarea id="editModalDesc" style="height: 80px;" placeholder="Detallá los tipos de gomitas que incluye..."></textarea>
+      </div>
+
+      <!-- Control de Stock en el Formulario -->
+      <div class="form-group">
+        <label>Disponibilidad de Stock</label>
+        <select id="editModalStock" style="border: 2px solid var(--pk-border); border-radius: 12px; padding: 11px 14px; font-weight: 700; font-size: 0.95rem;">
+          <option value="1">🟢 En Stock (Disponible para pedidos)</option>
+          <option value="0">🔴 Sin Stock (Pausado / Agotado)</option>
+        </select>
+      </div>
+
+      <!-- Imagen -->
+      <div class="form-group">
+        <label>Cambiar Imagen del Producto</label>
+        <input type="file" id="editModalFile" accept="image/*" onchange="previewModalImg(this)"/>
+        <img id="editModalImgPreview" style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 12px; margin-top: 10px; border: 1.5px solid var(--pk-border); display: none;"/>
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-top: 20px;">
+        <button class="btn-confirm-order" style="flex: 1;" onclick="saveProductModal()">
+          Guardar Cambios 💾
+        </button>
+        <button class="close-btn" style="width: 52px; height: 52px; border-radius: 14px;" onclick="closeProductModal()">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-msg" id="toastMsg">
+    <span id="toastIcon">✅</span>
+    <span id="toastText">Operación exitosa</span>
+  </div>
+
+  <!-- Script del Panel Admin -->
+  <script>
+    let currentFilter = 'all';
+
+    function showToast(text, icon = '✅') {
+      const toast = document.getElementById('toastMsg');
+      document.getElementById('toastIcon').textContent = icon;
+      document.getElementById('toastText').textContent = text;
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 2600);
+    }
+
+    function switchSection(section) {
+      document.getElementById('tabBtnMovimientos').classList.toggle('active', section === 'movimientos');
+      document.getElementById('tabBtnCatalogo').classList.toggle('active', section === 'catalogo');
+
+      document.getElementById('sectionMovimientos').style.display = section === 'movimientos' ? 'block' : 'none';
+      document.getElementById('sectionCatalogo').style.display = section === 'catalogo' ? 'block' : 'none';
+    }
+
+    // Toggle de stock interactivo en 1 clic
+    async function toggleProductStock(prodId) {
+      try {
+        const res = await fetch(`/api/products/${prodId}/toggle_stock`, { method: 'POST' });
+        const data = await res.json();
+
+        if (res.ok) {
+          const isStock = data.in_stock === 1;
+          const card = document.getElementById(`prodCard-${prodId}`);
+          const badge = document.getElementById(`stockBadge-${prodId}`);
+          const btn = document.getElementById(`btnStockToggle-${prodId}`);
+
+          if (isStock) {
+            card.classList.remove('out-of-stock');
+            badge.className = 'admin-stock-badge-tag badge-in-stock';
+            badge.textContent = '✅ En Stock';
+            btn.className = 'btn-stock-toggle is-stock';
+            btn.innerHTML = '<span>🟢</span> En Stock (Click para pausar)';
+            showToast('Producto marcado como EN STOCK');
+          } else {
+            card.classList.add('out-of-stock');
+            badge.className = 'admin-stock-badge-tag badge-out-stock';
+            badge.textContent = '🚫 Sin Stock';
+            btn.className = 'btn-stock-toggle no-stock';
+            btn.innerHTML = '<span>🔴</span> Sin Stock (Click para activar)';
+            showToast('Producto marcado como SIN STOCK 🚫', '⚠️');
+          }
+        } else {
+          alert(data.error || 'Error al cambiar stock');
+        }
+      } catch (e) {
+        alert('Error de conexión');
+      }
+    }
+
+    // Cambiar estado de pedido en vivo
+    async function updateOrderStatus(orderId, newStatus, selectElement) {
+      try {
+        const res = await fetch(`/api/orders/${orderId}/status`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          selectElement.className = `order-status-select status-${newStatus}`;
+          const card = selectElement.closest('.order-card');
+          if (card) card.setAttribute('data-status', newStatus);
+          showToast(`Pedido #${orderId} actualizado a ${newStatus.toUpperCase()}`);
+        } else {
+          alert(data.error || 'Error al actualizar pedido');
+        }
+      } catch (e) {
+        alert('Error de conexión');
+      }
+    }
+
+    // Eliminar pedido
+    async function deleteOrder(orderId) {
+      if (!confirm(`¿Estás seguro de eliminar el pedido #${orderId}?`)) return;
+      try {
+        const res = await fetch(`/api/orders/${orderId}`, { method: 'DELETE' });
+        if (res.ok) {
+          showToast(`Pedido #${orderId} eliminado`);
+          const card = document.querySelector(`.order-card[data-order-id="${orderId}"]`);
+          if (card) card.remove();
+          setTimeout(() => location.reload(), 600);
+        } else {
+          alert('Error al eliminar pedido');
+        }
+      } catch (e) {
+        alert('Error de conexión');
+      }
+    }
+
+    // Filtros de pedidos
+    function setOrderFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterOrders();
+    }
+
+    function filterOrders() {
+      const q = document.getElementById('orderSearchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.order-card').forEach(card => {
+        const status = card.getAttribute('data-status');
+        const client = card.getAttribute('data-client') || '';
+        const phone = card.getAttribute('data-phone') || '';
+        const text = card.textContent.toLowerCase();
+
+        const matchesStatus = currentFilter === 'all' || status === currentFilter;
+        const matchesSearch = !q || client.includes(q) || phone.includes(q) || text.includes(q);
+
+        card.style.display = (matchesStatus && matchesSearch) ? 'block' : 'none';
+      });
+    }
+
+    function filterProducts() {
+      const q = document.getElementById('prodSearchInput').value.toLowerCase().trim();
+      document.querySelectorAll('.admin-prod-card').forEach(card => {
+        const name = card.getAttribute('data-name') || '';
+        const desc = card.getAttribute('data-desc') || '';
+        card.style.display = (!q || name.includes(q) || desc.includes(q)) ? 'flex' : 'none';
+      });
+    }
+
+    // Modal Crear / Editar
+    async function openProductModal(prodId = null) {
+      document.getElementById('editModalProdId').value = prodId || '';
+      const preview = document.getElementById('editModalImgPreview');
+      document.getElementById('editModalFile').value = '';
+
+      if (prodId) {
+        document.getElementById('modalProdTitle').textContent = 'Editar Producto';
+        // Obtener datos actuales
+        const res = await fetch('/api/products');
+        const list = await res.json();
+        const prod = list.find(p => p.id === prodId);
+        if (prod) {
+          document.getElementById('editModalName').value = prod.name;
+          document.getElementById('editModalPrice').value = prod.price;
+          document.getElementById('editModalTag').value = prod.tag;
+          document.getElementById('editModalEmoji').value = prod.emoji || '🍬';
+          document.getElementById('editModalDesc').value = prod.desc || '';
+          document.getElementById('editModalStock').value = prod.in_stock !== undefined ? String(prod.in_stock) : '1';
+          if (prod.img) {
+            preview.src = prod.img;
+            preview.style.display = 'block';
+          } else {
+            preview.style.display = 'none';
+          }
+        }
+      } else {
+        document.getElementById('modalProdTitle').textContent = 'Nuevo Producto';
+        document.getElementById('editModalName').value = '';
+        document.getElementById('editModalPrice').value = '';
+        document.getElementById('editModalTag').value = 'Gomitas';
+        document.getElementById('editModalEmoji').value = '🍬';
+        document.getElementById('editModalDesc').value = '';
+        document.getElementById('editModalStock').value = '1';
+        preview.style.display = 'none';
+      }
+
+      document.getElementById('adminProdModal').classList.add('open');
+    }
+
+    function closeProductModal() {
+      document.getElementById('adminProdModal').classList.remove('open');
+    }
+
+    function previewModalImg(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const preview = document.getElementById('editModalImgPreview');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function saveProductModal() {
+      const prodId = document.getElementById('editModalProdId').value;
+      const name = document.getElementById('editModalName').value.trim();
+      const price = document.getElementById('editModalPrice').value.trim();
+      const tag = document.getElementById('editModalTag').value.trim() || 'Gomitas';
+      const emoji = document.getElementById('editModalEmoji').value.trim() || '🍬';
+      const desc = document.getElementById('editModalDesc').value.trim();
+      const in_stock = document.getElementById('editModalStock').value;
+      const fileInput = document.getElementById('editModalFile');
+
+      if (!name || !price) {
+        alert('Por favor ingresá el nombre y el precio del producto');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('price', price);
+      formData.append('tag', tag);
+      formData.append('emoji', emoji);
+      formData.append('desc', desc);
+      formData.append('in_stock', in_stock);
+
+      if (fileInput.files.length > 0) {
+        formData.append('file', fileInput.files[0]);
+      }
+
+      const url = prodId ? `/api/products/${prodId}` : '/api/products';
+
+      try {
+        const res = await fetch(url, { method: 'POST', body: formData });
+        if (res.ok) {
+          closeProductModal();
+          showToast(prodId ? 'Producto modificado exitosamente' : 'Producto agregado al catálogo');
+          setTimeout(() => location.reload(), 800);
+        } else {
+          const err = await res.json();
+          alert(err.error || 'Error al guardar');
+        }
+      } catch (e) {
+        alert('Error de conexión');
+      }
+    }
+
+    async function deleteProductFromAdmin(prodId) {
+      if (!confirm('¿Estás seguro de eliminar este producto del catálogo?')) return;
+      try {
+        const res = await fetch(`/api/products/${prodId}`, { method: 'DELETE' });
+        if (res.ok) {
+          showToast('Producto eliminado');
+          const card = document.getElementById(`prodCard-${prodId}`);
+          if (card) card.remove();
+        } else {
+          alert('Error al eliminar');
+        }
+      } catch (e) {
+        alert('Error de conexión');
+      }
+    }
+  </script>
+</body>
+</html>
