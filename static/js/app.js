@@ -347,16 +347,18 @@ function initFloatingCandies() {
   if (!container) return;
 
   const candyEmojis = ['🍬', '🍭', '🌈', '✨', '💖', '🍓', '⭐', '🎉', '🐻', '🦄', '🎀'];
+  const isMobile = window.innerWidth <= 768;
+  const count = isMobile ? 8 : 16;
 
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < count; i++) {
     const candy = document.createElement('span');
     candy.className = 'floating-candy';
     candy.textContent = candyEmojis[Math.floor(Math.random() * candyEmojis.length)];
 
-    const left = Math.random() * 95;
-    const size = 1.2 + Math.random() * 1.8;
-    const duration = 10 + Math.random() * 12;
-    const delay = Math.random() * 15;
+    const left = Math.random() * 92 + 2;
+    const size = isMobile ? (0.9 + Math.random() * 0.7) : (1.2 + Math.random() * 1.8);
+    const duration = isMobile ? (9 + Math.random() * 8) : (10 + Math.random() * 12);
+    const delay = Math.random() * 10;
 
     candy.style.left = `${left}%`;
     candy.style.bottom = `-50px`;
